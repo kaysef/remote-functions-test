@@ -38,8 +38,8 @@
 	);
 </script>
 
-<section class="animate-in fade-in-0 slide-in-from-right-2">
-	<a href="/" class="absolute top-12 rounded-full bg-red-500 px-4 py-2 text-white">Go back home</a>
+<section class="animate-in fade-in-0 slide-in-from-right-2 relative">
+	<a href="/" class="absolute -top-16 rounded-full bg-red-500 px-4 py-2 text-white">Go back home</a>
 	<Card.Root class="p-4">
 		<Card.Content>
 			<svelte:boundary>
