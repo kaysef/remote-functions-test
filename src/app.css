@@ -1,0 +1,334 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@import '@fontsource/poppins';
+
+/* @config '../tailwind.config.ts'; */
+/* @custom-variant dark (&:where(.dark, .dark *)); */
+@custom-variant dark (&:is(.dark *));
+
+/* Use this instead of tailwind-merge for specificity and overriding classes
+now instead of using `cn` function, just write the default classes like so
+
+`base:bg-red-500 base:text-white base:etc` and then whatever conflicting classes will override the ones with base:...
+so in this case `base:bg-red-500 bg-blue-500` means bg-blue-500 will be the one with a higher specificity. 
+This approach results in a minimal bundle size and one less package to add to your build. 
+*/
+@custom-variant base { 
+	@layer base {
+		@slot; 
+	}
+}
+
+@utility btn {
+	@apply rounded-md px-3 py-3 font-semibold shadow-md transition duration-300 hover:scale-105 active:translate-y-3;
+}
+
+@utility btn-white {
+	@apply hover:border-brand-yellow bg-white text-black hover:border hover:bg-transparent hover:text-white;
+}
+
+@utility no-spinner {
+	/* Hide number input spinners in Chrome, Safari, Edge, Opera */
+	&::-webkit-outer-spin-button,
+	&::-webkit-inner-spin-button {
+		-webkit-appearance: none;
+		margin: 0;
+	}
+
+	/* Hide number input spinners in Firefox */
+	&[type='number'] {
+		-moz-appearance: textfield;
+	}
+}
+@utility btn-transparent-dark {
+	@apply border bg-black/40 text-white hover:shadow-none;
+}
+
+@utility btn-transparent-dark-2 {
+	@apply after:bg-brand-yellow relative z-0 overflow-hidden border bg-black/40 text-white will-change-transform after:absolute after:top-0 after:left-0 after:-z-10 after:block after:h-full after:w-full after:origin-top-left after:[transform:translate(-100%,0)_rotate(10deg)] after:rounded-md after:will-change-transform after:content-[''] after:[transition:.2s_transform_ease-out] hover:text-black hover:will-change-transform hover:[border:2px_solid_transparent] hover:after:translate-x-0 hover:after:translate-y-0;
+}
+
+@utility btn-transparent-light {
+	@apply border bg-white/40 text-black/80;
+}
+
+@utility btn_blue {
+	@apply bg-brand-blue hover:bg-brand-yellow focus:bg-brand-blue text-white hover:text-black focus:text-white;
+}
+
+@utility btn-blue-80 {
+	@apply bg-brand-blue/80 hover:bg-brand-yellow inline-block px-12 py-3 text-sm font-medium text-white transition hover:text-black/80 focus:ring-3 focus:ring-yellow-400 focus:outline-hidden;
+}
+
+@utility btn_white {
+	/* .btn_teal {
+		@apply bg-brand-yellow text-white hover:bg-brand-yellow hover:text-black focus:bg-brand-yellow focus:text-white;
+	} */
+	@apply bg-brand-yellow hover:bg-brand-blue focus:bg-brand-yellow rounded-full text-black hover:text-white focus:text-black;
+}
+
+@utility btn_crim_anim {
+	@apply bg-brand-yellow before:bg-brand-blue focus:bg-brand-yellow relative z-20 overflow-hidden rounded-full text-black before:absolute before:top-0 before:-left-full before:-z-10 before:h-full before:w-full before:transition-all before:duration-300 before:content-[''] hover:text-white hover:before:left-0 focus:text-black;
+}
+
+@utility btn_white_anim {
+	@apply bg-brand-yellow before:bg-brand-yellow focus:bg-brand-yellow relative z-20 overflow-hidden rounded-full text-black before:absolute before:top-0 before:-left-full before:-z-10 before:h-full before:w-full before:transition-all before:duration-300 before:content-[''] hover:text-white hover:before:left-0 focus:text-black;
+}
+
+@utility btn_teal_anim {
+	@apply bg-brand-yellow before:bg-brand-yellow hover:bg-brand-yellow focus:bg-brand-yellow relative z-20 overflow-hidden rounded-full text-white before:absolute before:top-0 before:-left-full before:-z-10 before:h-full before:w-full before:transition-all before:duration-300 before:content-[''] hover:text-black hover:before:left-0 focus:text-white;
+}
+
+@utility optimize-speed {
+	text-rendering: optimizeSpeed;
+}
+
+@utility p-block {
+	padding-block: 5rem;
+}
+
+@utility cust-container {
+	/* // Use this for fluid containers. The default definition of tailwind containers results in snapping of components */
+	@apply mx-auto px-4 md:max-w-[92%] 2xl:max-w-(--breakpoint-2xl);
+}
+
+@utility clip-path-circle {
+	clip-path: circle(150% at 0 50%);
+
+
+}
+
+@utility fade-in {
+	/* For fade in on scroll */
+	opacity: 0;
+	transition: opacity 250ms ease-in;
+
+	&.appear {
+		opacity: 1;
+	}
+}
+
+@utility from-right {
+	transform: translateX(50%);
+	opacity: 0;
+	transition:
+		transform 1s ease-in,
+		opacity 250ms ease-in;
+
+	&.appear {
+		transform: translateX(0);
+		opacity: 1;
+	}
+}
+
+:root {
+	--clr-neutral-900: hsl(207, 19%, 9%);
+	--clr-neutral-100: hsl(0, 0%, 100%);
+	--clr-accent-400: hsl(142, 90%, 61%);
+	--padding: 1.5rem;
+
+	/* --background: 205 100% 100%; */
+	--background: hsl(206 80% 96%);
+	--foreground: hsl(205 5% 10%);
+	--card: hsl(205 100% 100%);
+	--card-foreground: hsl(205 5% 15%);
+	--popover: hsl(205 100% 100%);
+	--popover-foreground: hsl(205 100% 10%);
+	--primary: hsl(240 100% 33.73%);
+	--primary-foreground: hsl(0 0% 100%);
+	--secondary: hsl(205 30% 90%);
+	--secondary-foreground: hsl(0 0% 0%);
+	--muted: hsl(167 30% 95%);
+	--muted-foreground: hsl(205 5% 40%);
+	--accent: hsl(40, 3%, 78%);
+	--accent-foreground: hsl(205 5% 15%);
+	--destructive: hsl(0 100% 50%);
+	--destructive-foreground: hsl(205 5% 100%);
+	--border: hsl(205 100% 100%);
+	--input: hsl(205 30% 50%);
+	--ring: hsl(205 100% 51%);
+	--radius: 1rem;
+
+	--chart-1: hsl(20.8 100% 71%);
+	--chart-2: hsl(200.8 100% 71%);
+	--chart-3: hsl(80.8 100% 71%);
+	--chart-4: hsl(260.8 100% 71%);
+	--chart-5: hsl(50.8 100% 71%);
+
+	/* sidebar */
+	/* --sidebar-background: hsl(200, 27%, 98%);
+	--sidebar-foreground: hsl(205 5% 10%); */
+	--sidebar-foreground: hsl(200, 27%, 98%);
+	--sidebar-background: hsl(203 100% 21%);
+	--sidebar-primary: oklch(0.8 0.18 45);
+	--sidebar-primary-foreground: hsl(0 0% 98%);
+	--sidebar-accent: oklch(0.8407 0 102.07);
+	--sidebar-accent-foreground: hsl(240 5.9% 10%);
+	--sidebar-border: hsl(220 13% 91%);
+	--sidebar-ring: hsl(217.2 91.2% 59.8%);
+}
+
+.dark {
+	--background: hsl(255.5 10% 5%);
+	--foreground: hsl(255.5 0% 90%);
+	--card: hsl(255.5 0% 0%);
+	--card-foreground: hsl(255.5 0% 90%);
+	--popover: hsl(255.5 0% 0%);
+	--popover-foreground: hsl(255.5 0% 90%);
+	--chart-1: hsl(20.8 100% 71%);
+	--chart-2: hsl(200.8 100% 71%);
+	--chart-3: hsl(80.8 100% 71%);
+	--chart-4: hsl(260.8 100% 71%);
+	--chart-5: hsl(50.8 100% 71%);
+	--primary: hsl(57.5 100% 47.06%);
+	--primary-foreground: hsl(231 24% 16%);
+	--secondary: hsl(231 24% 16%);
+	--secondary-foreground: hsl(0 0% 100%);
+	--muted: hsl(193 24% 16%);
+	--muted-foreground: hsl(231 5% 60%);
+	--accent: hsl(193 24% 16%);
+	--accent-foreground: hsl(231 5% 90%);
+	--destructive: hsl(0 50% 30%);
+	--destructive-foreground: hsl(231 5% 90%);
+	--border: hsl(0, 0%, 4%);
+	/* --border: hsl(231 24% 18%); */
+	--input: hsl(231 24% 18%);
+	--ring: hsl(231 48.4% 47.8%);
+	--radius: 1rem;
+
+	/* sidebar */
+	--sidebar-background: hsl(229 25% 8%);
+	--sidebar-foreground: hsl(180 5% 90%);
+	--sidebar-primary: oklch(0.8 0.18 45);
+	--sidebar-primary-foreground: hsl(0 0% 100%);
+	--sidebar-accent: oklch(0.4371 0 102.07);
+	--sidebar-accent-foreground: hsl(180 5% 95%);
+	--sidebar-border: oklch(0.4371 0 102.07);
+	--sidebar-ring: oklch(0.4371 0 102.07);
+}
+
+@theme inline {
+	/* Radius (for rounded-*) */
+	--radius-sm: calc(var(--radius) - 4px);
+	--radius-md: calc(var(--radius) - 2px);
+	--radius-lg: var(--radius);
+	--radius-xl: calc(var(--radius) + 4px);
+
+	--font-sans: 'Poppins', sans-serif;
+
+	/* custom colors */
+	--color-brand-yellow: hsl(57.5 100% 47.06%);
+	--color-brand-blue: hsl(240 100% 33.73%);
+	--color-brand-primary: hsl(203 100% 21%);
+	--color-brand-secondary: oklch(0.968 0.211 109.77);
+	--color-brand-dark: hsl(203 100% 9%);
+	--color-neutral: hsl(207 15% 43%);
+	--color-accent-1: oklch(0.8 0.18 45);
+	--color-accent-2: oklch(0.75 0.18 285);
+
+	/* Colors */
+	--color-background: var(--background);
+	--color-foreground: var(--foreground);
+	--color-muted: var(--muted);
+	--color-muted-foreground: var(--muted-foreground);
+	--color-popover: var(--popover);
+	--color-popover-foreground: var(--popover-foreground);
+	--color-card: var(--card);
+	--color-card-foreground: var(--card-foreground);
+	--color-border: var(--border);
+	--color-input: var(--input);
+	--color-primary: var(--primary);
+	--color-primary-foreground: var(--primary-foreground);
+	--color-secondary: var(--secondary);
+	--color-secondary-foreground: var(--secondary-foreground);
+	--color-accent: var(--accent);
+	--color-accent-foreground: var(--accent-foreground);
+	--color-destructive: var(--destructive);
+	--color-destructive-foreground: var(--destructive-foreground);
+	--color-ring: var(--ring);
+	--color-radius: var(--radius);
+	--color-sidebar: var(--sidebar-background);
+	--color-sidebar-foreground: var(--sidebar-foreground);
+	--color-sidebar-primary: var(--sidebar-primary);
+	--color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+	--color-sidebar-accent: var(--sidebar-accent);
+	--color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+	--color-sidebar-border: var(--sidebar-border);
+	--color-sidebar-ring: var(--sidebar-ring);
+
+	/* Animations */
+	--animate-accordion-up: accordion-up 0.2s ease-out;
+	--animate-accordion-down: accordion-down 0.2s ease-out;
+	--animate-caret-blink: caret-blink 1.25s ease-out infinite;
+}
+
+@layer utilities {
+	.apexcharts-tooltip {
+		@apply bg-accent! text-accent-foreground!;
+		.apexcharts-tooltip-title {
+			@apply bg-accent! text-accent-foreground/70!;
+		}
+	}
+
+	/* // This can also be used to override the default styling for certain objects. e.g. in the html, h1, h2 */
+}
+@layer base {
+	* {
+		@apply border-border;
+	}
+
+	iconify-icon {
+		display: inline-block;
+		width: 1em;
+		height: 1em;
+	}
+	:has(:target) {
+		@apply scroll-pt-12 scroll-smooth;
+	}
+
+	:where(body) {
+		hyphens: auto;
+		overflow-wrap: break-word;
+	}
+
+	body {
+		@apply bg-background text-foreground optimize-speed;
+	}
+
+	html {
+		@apply scroll-pt-12 [hanging-punctuation:first_last];
+	}
+}
+
+@keyframes accordion-down {
+	from {
+		height: 0;
+	}
+
+	to {
+		height: var(--bits-accordion-content-height);
+	}
+}
+
+@keyframes accordion-up {
+	from {
+		height: var(--bits-accordion-content-height);
+	}
+
+	to {
+		height: 0;
+	}
+}
+
+@keyframes caret-blink {
+	0%,
+	70%,
+	100% {
+		opacity: 1;
+	}
+
+	20%,
+	50% {
+		opacity: 0;
+	}
+}
