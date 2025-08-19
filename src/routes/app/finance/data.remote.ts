@@ -13,7 +13,7 @@ type DataParams = {
 	activeBatchId?: string;
 }
 
-type Donation = {
+export type Donation = {
 	id: string;
 	subject: string;
 	donor_name: string;
